@@ -2,6 +2,12 @@ import requests
 import time
 import datetime
 import sys
+from twilio.rest import Client
+
+account_sid = ""
+auth_token = ""
+
+client = Client(account_sid, auth_token)
 
 minute = 39
 seconds = 2
@@ -45,7 +51,11 @@ def sendBookingRequest(session):
         url = "https://kronox.hkr.se/ajax/ajax_resursbokning.jsp?op=boka&datum=%s&id=%s&typ=RESURSER_LOKALER&intervall=%d&moment=&flik=FLIK_0000" % (todayString, room, interval)
         response = session.get(url, headers = headers)
         if response.text == "OK":
-            print "Room %s was successfully booked." % room
+            message = client.messages.create(
+                    body="Some %s was booked for you, sir." % room,
+                    from_="",
+                    to=""
+                )
             break
         else:
             print response.text
