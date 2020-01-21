@@ -9,7 +9,7 @@ auth_token = ""
 
 client = Client(account_sid, auth_token)
 
-minute = 39
+minute = 16
 seconds = 2
 STARTING_HOUR = 8
 
